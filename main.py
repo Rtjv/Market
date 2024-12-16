@@ -39,54 +39,36 @@ while True:
         email = input("Digite seu email para cadastrar:")
         if not validar_email(email):
             print("Email invalido")
-            continue
+            break
 
 
         password = input("Digite a senha para este conta:")
+
+        for c in clientes:
+            if c.getCpf() == cpf:
+                print("Cpf já cadastrado")
+                break
+            if c.getEmail() == email:
+                print("Email ja cadastrado")
+                break
         
-        cliente_data = {
-            "name": name,
-            "cpf": cpf,
-            "age": age,
-            "email": email,
-            "password": password
-        }
-
-        funcionario_data = {
-            "name":name,
-            "cpf":cpf,
-            "age":age,
-            "matricula":matricula,
-            "password":password
-
-        }
-
-        if clientes.val():
-            for c in clientes.each():
-                if c.val()["cpf"] == cpf:
-                    print("Cpf já cadastrado")
-                    break
-                if c.val()["email"] == email:
-                    print("Email ja cadastrado")
-                    break
-            else:
-                print("Cliente cadastrado com sucesso")
-        else:
-            print("Cliente cadastrado com sucesso")
+        newClient = Cliente(name, cpf, age, email, password)
+        clientes.append(newClient)
+    
        
 
     elif opcao == 2:
         email = input("Digite seu email:")
         password = input("Digite sua senha:")
 
-        if clientes.val():
+        if clientes:
             cliente_encontrado = None
-            for c in clientes.each():
-                if c.val()["email"] == email and c.val()["password"] == password:
-                    cliente_encontrado = c.val()
+            for c in clientes:
+                if c.getEmail() == email and c.getPassword() == password:
+                    cliente_encontrado = c
                     break
             if cliente_encontrado:
-                print(f"{cliente_encontrado['name']}, seja bem vindo")
+                print(f"{cliente_encontrado.getName()}, seja bem vindo")
             else:
                 print("Email ou senha incorretos")
         else:
@@ -107,14 +89,14 @@ while True:
             print("Senha invalida")
             continue
 
-        if funcionarios.val():
+        if funcionarios:
             funcionario_encontrado = None
-            for f in funcionarios.each():
-                if f.val()["matricula"] == matricula and f.val()["password"] == password:
-                    funcionario_encontrado = f.val()
+            for f in funcionarios:
+                if f.getMatricula == matricula and f.getPassword == password:
+                    funcionario_encontrado = f
                     break
             if funcionario_encontrado:
-                print(f"Bem vindo {funcionario_encontrado['name']} ")
+                print(f"Bem vindo {funcionario_encontrado.getName} ")
             else:
                 print("Matricula ou senha incorretas")
         else:
