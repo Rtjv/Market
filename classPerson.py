@@ -1,16 +1,12 @@
 class Person:
-    def __init__(self, name, cpf, age):
+    def __init__(self, name, id, age, email, password):
         self.__name = name
-        self.__cpf = cpf
+        self.__id = id
         self.__age = age
-    def getCpf(self):
-        return self.__cpf
-    
-class Cliente(Person):
-    def __init__(self, name, cpf, age, email, password):
-        super().__init__(name, cpf, age)
         self.__email = email
         self.__password = password
+    def getId(self):
+        return self.__id
         
     def getEmail(self):
         return self.__email
@@ -21,14 +17,21 @@ class Cliente(Person):
     def getName(self):
         return self.__name
 
+#cria uma classe pessoa com nome, id e idade. 
 
-class Funcionario(Person):
-    def __init__(self, name, cpf, age, matricula, password):
-        super().__init__(name, cpf, age)
-        self.__matricula = matricula
+class User(Person):
+    def __init__(self, name, id, age, email, password):
+        super().__init__(name, id, age, email, password)
+
+#cria uma classe usuario que herda de pessoa.         
+
+class Employee(Person):
+    def __init__(self, name, id, age, registration_id, password):
+        super().__init__(name, id, age)
+        self.__registration_id = registration_id
         self.__password = password
     
-    def getMatricula(self):
-        return self.__matricula
+    def getRegistrationid(self):
+        return self.__registration_id
 
-    
+#cria uma classe empregado que herda de pessoa.        
